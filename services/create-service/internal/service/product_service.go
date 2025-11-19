@@ -7,9 +7,9 @@ import (
 )
 
 type ProductService struct {
-	Repo *repository.ProductRepository
+	Repo repository.ProductRepositoryInterface
 }
 
-func (s *ProductService) Create(ctx context.Context, product interface{}) error {
+func (s *ProductService) Create(ctx context.Context, product any) error {
 	return s.Repo.Create(ctx, product)
 }

@@ -9,6 +9,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+type ProductRepositoryInterface interface {
+	UpdateByID(ctx context.Context, id any, update bson.M) (*mongo.UpdateResult, error)
+}
+
 type UpdateRepository struct {
 	collection *mongo.Collection
 }

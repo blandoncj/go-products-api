@@ -15,6 +15,10 @@ type Product struct {
 	Stock       int         `bson:"stock" json:"stock"`
 }
 
+type ProductRepositoryInterface interface {
+	FindAll(ctx context.Context) ([]Product, error)
+}
+
 type ProductRepository struct {
 	collection *mongo.Collection
 }

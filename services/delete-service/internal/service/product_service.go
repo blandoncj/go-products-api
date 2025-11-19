@@ -7,10 +7,10 @@ import (
 )
 
 type ProductService struct {
-	repo *repository.DeleteRepository
+	repo repository.ProductRepositoryInterface
 }
 
-func NewProductService(repo *repository.DeleteRepository) *ProductService {
+func NewProductService(repo repository.ProductRepositoryInterface) *ProductService {
 	return &ProductService{repo: repo}
 }
 
