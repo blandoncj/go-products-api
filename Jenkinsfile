@@ -109,6 +109,7 @@ pipeline {
             }
         }
         
+        
         stage('Business Rules Tests') {
             steps {
                 echo '📋 ========================================='
@@ -121,7 +122,7 @@ pipeline {
                     dir('services/create-service') {
                         sh '''
                             echo "→ Test: Producto con precio negativo debe rechazarse"
-                            go test -v -run TestProductService_Create_InvalidProduct
+                            go test ./internal/service -v -run TestProductService_Create_InvalidProduct
                         '''
                     }
                     
@@ -130,7 +131,7 @@ pipeline {
                     dir('services/create-service') {
                         sh '''
                             echo "→ Test: Producto con stock 0 debe poder crearse"
-                            go test -v -run TestProductService_Create_StockZero
+                            go test ./internal/service -v -run TestProductService_Create_StockZero
                         '''
                     }
                     
@@ -139,7 +140,7 @@ pipeline {
                     dir('services/delete-service') {
                         sh '''
                             echo "→ Test: Eliminar producto inexistente no genera error"
-                            go test -v -run TestProductService_DeleteProduct_NotFound
+                            go test ./internal/service -v -run TestProductService_DeleteProduct_NotFound
                         '''
                     }
                     
@@ -148,7 +149,7 @@ pipeline {
                     dir('services/delete-service') {
                         sh '''
                             echo "→ Test: Errores de BD deben propagarse correctamente"
-                            go test -v -run TestProductService_DeleteProduct_DatabaseError
+                            go test ./internal/service -v -run TestProductService_DeleteProduct_DatabaseError
                         '''
                     }
                     
