@@ -1,0 +1,87 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: parcial_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  create:
+    build: ./services/create-service/
+    container_name: create_service
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - CREATE_SERVICE_PORT=${CREATE_SERVICE_PORT}
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DB=${MONGO_DB}
+    ports:
+      - "${CREATE_SERVICE_PORT}:${CREATE_SERVICE_PORT}"
+
+  read:
+    build: ./services/read-service/
+    container_name: read_service
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - READ_SERVICE_PORT=${READ_SERVICE_PORT}
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DB=${MONGO_DB}
+    ports:
+      - "${READ_SERVICE_PORT}:${READ_SERVICE_PORT}"
+
+  update:
+    build: ./services/update-service/
+    container_name: update_service
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - UPDATE_SERVICE_PORT=${UPDATE_SERVICE_PORT}
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DB=${MONGO_DB}
+    ports:
+      - "${UPDATE_SERVICE_PORT}:${UPDATE_SERVICE_PORT}"
+
+  delete:
+    build: ./services/delete-service/
+    container_name: delete_service
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      - DELETE_SERVICE_PORT=${DELETE_SERVICE_PORT}
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DB=${MONGO_DB}
+    ports:
+      - "${DELETE_SERVICE_PORT}:${DELETE_SERVICE_PORT}"
+
+volumes:
+  mongo_data:

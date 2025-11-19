@@ -60,18 +60,18 @@ func NewHandler() http.Handler {
 		_, _ = w.Write([]byte("Read service OK"))
 	})
 
-	mux.HandleFunc("/mascotas", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/products", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			return
 		}
-		mascotas, err := svc.GetAll(r.Context())
+		products, err := svc.GetAll(r.Context())
 		if err != nil {
-			http.Error(w, "error reading mascotas: "+err.Error(), http.StatusInternalServerError)
+			http.Error(w, "error reading products: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(mascotas)
+		_ = json.NewEncoder(w).Encode(products)
 	})
 
 	return mux

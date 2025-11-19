@@ -8,9 +8,11 @@ import (
 )
 
 type Product struct {
-	ID   interface{} `bson:"_id,omitempty" json:"_id"`
-	Name string      `bson:"name" json:"name"`
-	Age  int         `bson:"age" json:"age"`
+	ID          interface{} `bson:"_id,omitempty" json:"_id"`
+	Name        string      `bson:"name" json:"name"`
+	Description int         `bson:"description" json:"description"`
+	Price       float64     `bson:"price" json:"price"`
+	Stock       int         `bson:"stock" json:"stock"`
 }
 
 type ProductRepository struct {
