@@ -20,6 +20,7 @@ pipeline {
             steps {
                 echo '🔧 Configurando entorno...'
                 sh '''
+                    export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
                     go version
                     docker --version
                     docker-compose --version
