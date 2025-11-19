@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD Pipeline
 
 permissions:
   contents: write
@@ -107,10 +107,12 @@ jobs:
           args: '-no-fail -fmt sarif -out gosec-results.sarif ./...'
         continue-on-error: true
 
-      - name: Upload gosec results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: gosec-results.sarif
+      - name: Display gosec results
+        run: |
+          if [ -f gosec-results.sarif ]; then
+            echo "✅ Security scan completed"
+            cat gosec-results.sarif
+          fi
         if: always()
 
   build:
