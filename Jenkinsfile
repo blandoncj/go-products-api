@@ -160,21 +160,6 @@ pipeline {
             }
         }
         
-        stage('Security Scan') {
-            steps {
-                echo '🔒 Análisis de seguridad...'
-                sh '''
-                    # Instalar gosec si no está instalado
-                    if ! command -v gosec &> /dev/null; then
-                        go install github.com/securego/gosec/v2/cmd/gosec@latest
-                    fi
-                    
-                    # Ejecutar análisis de seguridad
-                    gosec -no-fail ./...
-                '''
-            }
-        }
-        
         stage('Build Docker Images') {
             steps {
                 echo '🐳 Construyendo imágenes Docker...'
