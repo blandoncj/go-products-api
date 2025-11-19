@@ -10,6 +10,6 @@ type ProductService struct {
 	Repo *repository.ProductRepository
 }
 
-func (s *ProductService) Create(ctx context.Context, mascota interface{}) error {
-	return s.Repo.Create(ctx, mascota)
+func (s *ProductService) Create(ctx context.Context, product interface{}) error {
+	return s.Repo.Create(ctx, product)
 }
