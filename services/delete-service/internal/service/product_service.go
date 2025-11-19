@@ -14,7 +14,7 @@ func NewProductService(repo *repository.DeleteRepository) *ProductService {
 	return &ProductService{repo: repo}
 }
 
-func (s *ProductService) DeleteMascota(ctx context.Context, id interface{}) error {
+func (s *ProductService) DeleteProduct(ctx context.Context, id interface{}) error {
 	_, err := s.repo.DeleteByID(ctx, id)
 	return err
 }
