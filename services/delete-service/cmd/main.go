@@ -10,7 +10,7 @@ import (
 
 func main() {
 	port := "8084"
-	if p := GetEnv("DELETE_PORT", "8084"); p != "" {
+	if p := GetEnv("DELETE_SERVICE_PORT", "8084"); p != "" {
 		port = p
 	}
 	handler := controller.NewHandler()
