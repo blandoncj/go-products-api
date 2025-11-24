@@ -237,7 +237,6 @@ Content-Type: application/json
   "name": "Product Name",
   "description": "Product Description",
   "price": 99.99,
-  "category": "Electronics",
   "stock": 100
 }
 ```
@@ -250,10 +249,7 @@ Content-Type: application/json
   "name": "Product Name",
   "description": "Product Description",
   "price": 99.99,
-  "category": "Electronics",
   "stock": 100,
-  "created_at": "2024-11-18T10:30:00Z",
-  "updated_at": "2024-11-18T10:30:00Z"
 }
 ```
 
@@ -279,10 +275,7 @@ GET /products/{id}
   "name": "Product Name",
   "description": "Product Description",
   "price": 99.99,
-  "category": "Electronics",
   "stock": 100,
-  "created_at": "2024-11-18T10:30:00Z",
-  "updated_at": "2024-11-18T10:30:00Z"
 }
 ```
 
@@ -600,6 +593,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Maintained by**: Your Name  
-**Repository**: <https://github.com/yourusername/go-products-api>  
-**Issues**: <https://github.com/yourusername/go-products-api/issues>
+**Maintained by**: Jacobo Blandón Castro  
+**Repository**: <https://github.com/blandoncj/go-products-api>  
